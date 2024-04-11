@@ -21,12 +21,15 @@ define(["N/record", "N/email"], function (record, email) {
         id:rec.id,
         isDynamic:true
       })
-      soRec.selectLine({
+
+      var lineCount = soRec.getLineCount({sublistId:'item'});
+
+      for(var x=0;x<lineCount;x++){
+           soRec.selectLine({
         sublistId: 'item',
-        line: 1
+        line: x
       })
    
-
     var subrecordInvDetail = soRec.getCurrentSublistSubrecord({
         sublistId: 'item',
         fieldId: 'inventorydetail'
@@ -48,7 +51,8 @@ define(["N/record", "N/email"], function (record, email) {
             sublistId: 'inventoryassignment'
         });    
     }
-    
+          
+      }
       soRec.commitLine({
         sublistId: 'item'
     });
